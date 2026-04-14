@@ -77,7 +77,7 @@ document.getElementById('fetch-alerts').addEventListener('click', () => {
     fetchWeatherAlerts(stateInput);
 });
 
-// Allow pressing Enter
+// Allow pressing Enter Key to trigger the fetch
 document.getElementById('state-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         document.getElementById('fetch-alerts').click();
