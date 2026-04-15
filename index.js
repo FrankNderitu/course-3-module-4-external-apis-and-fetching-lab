@@ -2,7 +2,15 @@
 
 
 // Your code here!
-async function  fetchWeatherAlerts(state) {
+async function fetchWeatherAlerts(state) {
+    const alertsDisplay = document.getElementById('alerts-display');
+    const errorDiv = document.getElementById('error-message');
+
+    // Reset UI (show loading, hide error)
+    alertsDisplay.innerHTML = '<p>Loading alerts...</p>';
+    errorDiv.classList.add('hidden');
+    errorDiv.textContent = '';
+
     try {
         const response = await fetch(`https://api.weather.gov/alerts/active?area=${state}`);
         if (!response.ok) {
@@ -38,8 +46,7 @@ function displayAlerts(data) {
         noAlerts.textContent = 'No active alerts at this time for this state.';
         noAlerts.style.color = 'green';
         alertsDisplay.appendChild(noAlerts);
-        return;
-    }
+    } else {
 
     // Create list of alert headlines
     const list = document.createElement('ul');
@@ -52,9 +59,8 @@ function displayAlerts(data) {
         listItem.style.margin = '10px 0';
         list.appendChild(listItem);
     });
-
     alertsDisplay.appendChild(list);
-
+    }
     document.getElementById('state-input').value = '';   
 }   
 // Show error message
